@@ -6,6 +6,7 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view("template/index");
+        $data['title'] = "E-Voting | Home";
+        return view("template/index", $data);
     }
 }

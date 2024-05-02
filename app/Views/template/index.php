@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Ecommerce Dashboard &mdash; Stisla</title>
+  <title><?= $title; ?></title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/modules/bootstrap/css/bootstrap.min.css">
@@ -13,6 +13,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.min.css">
   <!-- Start GA -->
 
   <!-- /END GA -->
@@ -63,147 +64,7 @@
 
       <!-- Main Content -->
       <div class="main-content">
-        <section class="section">
-          <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
-                <div class="card-stats">
-                  <div class="card-stats-title">Order Statistics -
-
-                  </div>
-                  <div class="card-stats-items">
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Pending</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
-                      <div class="card-stats-item-label">Shipping</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
-                      <div class="card-stats-item-label">Completed</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-archive"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Total Orders</h4>
-                  </div>
-                  <div class="card-body">
-                    59
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
-                <div class="card-stats">
-                  <div class="card-stats-title">Order Statistics -
-                  </div>
-                  <div class="card-stats-items">
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Pending</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
-                      <div class="card-stats-item-label">Shipping</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
-                      <div class="card-stats-item-label">Completed</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-archive"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Total Orders</h4>
-                  </div>
-                  <div class="card-body">
-                    59
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
-                <div class="card-stats">
-                  <div class="card-stats-title">Order Statistics -
-
-                  </div>
-                  <div class="card-stats-items">
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Pending</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
-                      <div class="card-stats-item-label">Shipping</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
-                      <div class="card-stats-item-label">Completed</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-archive"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Total Orders</h4>
-                  </div>
-                  <div class="card-body">
-                    59
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div class="col-12">
-            <div class="card card-statistic-2">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
+        <?= $this->renderSection('content'); ?>
       </div>
 
     </div>
@@ -236,6 +97,10 @@
   <!-- Template JS File -->
   <script src="<?= base_url() ?>assets/js/scripts.js"></script>
   <script src="<?= base_url() ?>assets/js/custom.js"></script>
+  <?= $this->renderSection('scripts'); ?>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
+  <?= $this->renderSection('swal'); ?>
+
 </body>
 
 </html>
