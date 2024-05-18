@@ -5,23 +5,41 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
-$routes->get('/dashboard', 'DashboardController::index');
-$routes->get('/dashboard/voters', 'DashboardUserController::index');
+$routes->get('/login', 'Home::login');
+$routes->post('/login', 'Home::authenticate');
 
-$routes->get('/dashboard/classes', 'DashboardClassController::index');
-$routes->post('/dashboard/classes/store', 'DashboardClassController::store');
-$routes->post('/dashboard/classes/update', 'DashboardClassController::update');
-$routes->post('/dashboard/classes/delete', 'DashboardClassController::delete');
+$routes->post('/logout', 'Home::logout');
 
+$routes->get('/', 'WebController::index');
 
-$routes->get('/dashboard/groups', 'DashboardGroupController::index');
-$routes->post('/dashboard/groups/store', 'DashboardGroupController::store');
-$routes->post('/dashboard/groups/update', 'DashboardGroupController::update');
-$routes->post('/dashboard/groups/delete', 'DashboardGroupController::delete');
+$routes->group('dashboard', ['filter' => ['auth', 'admin']], function ($routes) {
+  $routes->get('/', 'DashboardController::index');
 
-$routes->get('/dashboard/candidates', 'DashboardCandidateController::index');
-$routes->get('/dashboard/candidates/create', 'DashboardCandidateController::create');
-$routes->post('/dashboard/candidates/store', 'DashboardCandidateController::store');
-$routes->post('/dashboard/candidates/update', 'DashboardCandidateController::update');
-$routes->post('/dashboard/candidates/delete', 'DashboardCandidateController::delete');
+  $routes->get('voters', 'DashboardUserController::index');
+  $routes->post('voters/store', 'DashboardUserController::store');
+  $routes->post('voters/update', 'DashboardUserController::update');
+
+  $routes->get('classes', 'DashboardClassController::index');
+  $routes->post('classes/store', 'DashboardClassController::store');
+  $routes->post('classes/update', 'DashboardClassController::update');
+  $routes->post('classes/delete', 'DashboardClassController::delete');
+
+  $routes->get('groups', 'DashboardGroupController::index');
+  $routes->post('groups/store', 'DashboardGroupController::store');
+  $routes->post('groups/update', 'DashboardGroupController::update');
+  $routes->post('groups/delete', 'DashboardGroupController::delete');
+
+  $routes->get('candidates', 'DashboardCandidateController::index');
+  $routes->get('candidates/create', 'DashboardCandidateController::create');
+  $routes->get('candidates/edit/(:segment)', 'DashboardCandidateController::edit/$1');
+  $routes->post('candidates/store', 'DashboardCandidateController::store');
+  $routes->post('candidates/update/(:segment)', 'DashboardCandidateController::update/$1');
+  $routes->post('candidates/delete/(:segment)', 'DashboardCandidateController::delete/$1');
+
+  $routes->get('candidates/experiences', 'DashboardCandidateExperienceController::index');
+  $routes->get('candidates/experiences/create', 'DashboardCandidateExperienceController::create');
+  $routes->get('candidates/experiences/edit/(:segment)', 'DashboardCandidateExperienceController::edit/$1');
+  $routes->post('candidates/experiences/store', 'DashboardCandidateExperienceController::store');
+  $routes->post('candidates/experiences/update/(:segment)', 'DashboardCandidateExperienceController::update/$1');
+  $routes->post('candidates/experiences/delete/(:segment)', 'DashboardCandidateExperienceController::delete/$1');
+});

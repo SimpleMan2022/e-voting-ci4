@@ -17,10 +17,10 @@
           <thead>
             <tr>
               <th scope="col">No</th>
-              <th scope="col">Group Number</th>
-              <th scope="col">Vision</th>
+              <th scope="col" width="5%">Group Number</th>
+              <th scope="col" width="30%">Vision</th>
               <th scope="col">Mission</th>
-              <th scope="col">Action</th>
+              <th scope="col" width="20%">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -31,7 +31,7 @@
                 <td><?= $value['vision']; ?></td>
                 <td><?= $value['mission']; ?></td>
                 <td>
-                  <button class="btn btn-primary btn-sm show-data" data-id="<?= $value['id']; ?>" data-group-number="<?= $value['group_number']; ?>" data-group_image="<?= $value['group_image']; ?>" data-vision="<?= $value['vision']; ?>" data-mission="<?= $value['mission']; ?>" data-toggle="modal" data-target="#edit"><i class="fas fa-eye"></i></button>
+                  <button class="btn btn-primary btn-sm show-data" data-id="<?= $value['id']; ?>" data-group-number="<?= $value['group_number']; ?>" data-group_image="<?= $value['group_image']; ?>" data-vision="<?= $value['vision']; ?>" data-mission="<?= $value['mission']; ?>" data-toggle="modal" data-target="#show"><i class="fas fa-eye"></i></button>
                   <button class="btn btn-primary btn-sm edit-data" data-id="<?= $value['id']; ?>" data-group-number="<?= $value['group_number']; ?>" data-group_image="<?= $value['group_image']; ?>" data-vision="<?= $value['vision']; ?>" data-mission="<?= $value['mission']; ?>" data-toggle="modal" data-target="#edit"><i class="fas fa-edit"></i></button>
                   <button class="btn btn-primary btn-sm delete-data" data-id="<?= $value['id']; ?>" data-group_image="<?= $value['group_image']; ?>"><i class="fas fa-trash"></i></button>
                 </td>
@@ -43,12 +43,22 @@
     </div>
   </section>
 
+  <div class="modal fade" id="show" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+
+        <div class="modal-body p-0">
+          <img src="#" id="img-group" alt="image-group" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add new class</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add new group</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -81,7 +91,7 @@
               </div>
               <div class=" mb-3">
                 <label for="mission" class="form-label">Mission</label>
-                <input type="text" class="form-control <?= isset(session('validationErrors')['mission']) ? 'is-invalid' : ''; ?>" id="mission" name="mission" min=0 max=30 value="<?= old('mission'); ?>">
+                <textarea cols="30" rows="10" class="form-control <?= isset(session('validationErrors')['mission']) ? 'is-invalid' : ''; ?>" id="mission" name="mission" min=0 max=30 value="<?= old('mission'); ?>"></textarea>
                 <div class="invalid-feedback">
                   <p><?= session('validationErrors')['mission'] ?? ''; ?></p>
                 </div>
@@ -136,7 +146,7 @@
               </div>
               <div class=" mb-3">
                 <label for="mission" class="form-label">Mission</label>
-                <input type="text" class="form-control <?= isset(session('validationErrors')['mission']) ? 'is-invalid' : ''; ?>" id="mission" name="mission" min=0 max=30 value="<?= old('mission'); ?>">
+                <textarea class="form-control <?= isset(session('validationErrors')['mission']) ? 'is-invalid' : ''; ?>" id="mission" name="mission" min=0 max=30 value="<?= old('mission'); ?>"></textarea>
                 <div class="invalid-feedback">
                   <p><?= session('validationErrors')['mission'] ?? ''; ?></p>
                 </div>
@@ -176,6 +186,10 @@
   </script>
   <script>
     $(document).ready(function() {
+      $(document).on('click', '.show-data', function() {
+        var img = $(this).data('group_image');
+        $('#show .modal-body img').attr('src', "<?= base_url(); ?>uploads/group/" + img);
+      })
 
       $(document).on('click', '.edit-data', function() {
         var id = $(this).data('id');
@@ -201,7 +215,7 @@
 
       $(document).on('click', '.delete-data', function() {
         Swal.fire({
-          title: "Do you want to save the changes?",
+          title: "Do you want to delete this data?",
           showCancelButton: true,
           confirmButtonText: "Delete",
         }).then((result) => {

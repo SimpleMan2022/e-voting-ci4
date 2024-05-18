@@ -3,18 +3,17 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use PDO;
 
-class CandidateModel extends Model
+class UserModel extends Model
 {
-    protected $table            = 'candidates';
+    protected $table            = 'users';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        "id", "group_number_id", "name", "nim", "place_of_birth", "birth_of_date", "role", "image"
+        "id", "name", "email", "password", "class_id", "is_admin"
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -47,11 +46,11 @@ class CandidateModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getCandidateGroup()
+    public function getVotersWithClass()
     {
-        return $this->db->table('candidates')
-            ->select('candidates.id, candidates.name, candidates.nim, candidates.group_number_id, candidates.role, groups.group_number')
-            ->join('groups', 'groups.id = candidates.group_number_id')
+        return $this->db->table('users')
+            ->select('users.id, users.name, users.email, users.password, users.class_id, users.is_admin, classes.name as class_name')
+            ->join('classes', 'classes.id = users.class_id')
             ->get()
             ->getResultArray();
     }

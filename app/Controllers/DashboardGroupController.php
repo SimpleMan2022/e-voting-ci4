@@ -19,8 +19,14 @@ class DashboardGroupController extends BaseController
     {
         $data['title'] = 'E-Voting | Group Management';
         $data['groups'] = $this->model->findAll();
+
+        foreach ($data['groups'] as &$group) {
+            $group['mission'] = implode(' ', array_slice(explode(' ', $group['mission']), 0, 5)) . ' ...';
+        }
+
         return view('dashboard/group/index', $data);
     }
+
 
     public function store()
     {

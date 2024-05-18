@@ -1,0 +1,47 @@
+body {
+  height: 2000px;
+}
+
+.content-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.content-full {
+  background-color: #3498db;
+  padding: 20px;
+}
+
+.content-center .col-md-6 {
+  text-align: center;
+}
+
+.img-fluid-custom {
+  max-width: 70%;
+}
+
+.navbar-transparent {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.navbar-scrolled {
+  background-color: black !important;
+  color: white !important;
+}
+
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-brand {
+  color: white !important;
+}
+
+section {
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}

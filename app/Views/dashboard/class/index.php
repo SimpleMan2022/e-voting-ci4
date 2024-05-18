@@ -163,7 +163,7 @@
       $(document).on('click', '.delete-data', function() {
         console.log($(this).data('id'));
         Swal.fire({
-          title: "Do you want to save the changes?",
+          title: "Do you want to delete this data?",
           showCancelButton: true,
           confirmButtonText: "Delete",
         }).then((result) => {

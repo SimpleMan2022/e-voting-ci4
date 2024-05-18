@@ -3,18 +3,17 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use PDO;
 
-class CandidateModel extends Model
+class CandidateExperienceModel extends Model
 {
-    protected $table            = 'candidates';
+    protected $table            = 'candidate_details';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        "id", "group_number_id", "name", "nim", "place_of_birth", "birth_of_date", "role", "image"
+        "id", "candidate_id", "experience", "description", "start", "end"
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -47,11 +46,12 @@ class CandidateModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getCandidateGroup()
+
+    public function getCandidateExperience()
     {
-        return $this->db->table('candidates')
-            ->select('candidates.id, candidates.name, candidates.nim, candidates.group_number_id, candidates.role, groups.group_number')
-            ->join('groups', 'groups.id = candidates.group_number_id')
+        return $this->db->table('candidate_details')
+            ->select('candidate_details.id, candidate_details.candidate_id, candidate_details.experience, candidate_details.description, candidate_details.start, candidate_details.end, candidates.name, candidates.nim, candidates.group_number_id, candidates.role, candidates.image')
+            ->join('candidates', 'candidates.id = candidate_details.candidate_id')
             ->get()
             ->getResultArray();
     }
