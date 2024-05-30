@@ -20,7 +20,7 @@
             <tr>
               <th scope="col">No</th>
               <th scope="col">Name</th>
-              <th scope="col">Email</th>
+              <th scope="col" width="200">Email</th>
               <th scope="col">Class</th>
               <th scope="col">Action</th>
             </tr>

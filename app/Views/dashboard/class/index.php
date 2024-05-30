@@ -19,7 +19,6 @@
               <th scope="col">No</th>
               <th scope="col">Name</th>
               <th scope="col">Generation</th>
-              <th scope="col">Total</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -29,9 +28,8 @@
                 <th scope="row"><?= $key + 1 ?></th>
                 <td><?= $value['name']; ?></td>
                 <td><?= $value['generation']; ?></td>
-                <td><?= $value['total']; ?></td>
                 <td>
-                  <button class="btn btn-primary btn-sm edit-data" data-id="<?= $value['id']; ?>" data-name="<?= $value['name']; ?>" data-generation="<?= $value['generation']; ?>" data-total="<?= $value['total']; ?>" data-toggle="modal" data-target="#edit"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-primary btn-sm edit-data" data-id="<?= $value['id']; ?>" data-name="<?= $value['name']; ?>" data-generation="<?= $value['generation']; ?>" data-toggle="modal" data-target="#edit"><i class="fas fa-edit"></i></button>
                   <button class="btn btn-primary btn-sm delete-data" data-id="<?= $value['id']; ?>"><i class="fas fa-trash"></i></button>
                 </td>
               </tr>
@@ -70,13 +68,6 @@
                   <p><?= session('validationErrors')['generation'] ?? ''; ?></p>
                 </div>
               </div>
-              <div class=" mb-3">
-                <label for="total" class="form-label">Total</label>
-                <input type="number" class="form-control <?= isset(session('validationErrors')['total']) ? 'is-invalid' : ''; ?>" id="total" name="total" min=0 max=30 value="<?= old('total'); ?>">
-                <div class="invalid-feedback">
-                  <p><?= session('validationErrors')['total'] ?? ''; ?></p>
-                </div>
-              </div>
             </div>
         </div>
 
@@ -113,10 +104,6 @@
                 <label for="generation" class="form-label">Generation</label>
                 <input type="text" class="form-control" id="generation" name="generation">
               </div>
-              <div class="mb-3">
-                <label for="total" class="form-label">Total</label>
-                <input type="number" class="form-control" id="total" name="total" min=0 max=30>
-              </div>
             </div>
         </div>
 
@@ -144,12 +131,10 @@
         var id = $(this).data('id');
         var name = $(this).data('name');
         var generation = $(this).data('generation');
-        var total = $(this).data('total');
 
         $('#edit .modal-body #id').val(id);
         $('#edit .modal-body #name').val(name);
         $('#edit .modal-body #generation').val(generation);
-        $('#edit .modal-body #total').val(total);
 
       });
     });

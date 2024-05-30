@@ -66,13 +66,11 @@
             <div class="mb-3">
               <label for="birth_of_date" class="form-label">Role</label>
               <select name="role" id="role" class="form-control <?= isset(session('validationErrors')['role']) ? 'is-invalid' : ''; ?>">
-                <option value="#" selected disabled>Select Role</option>
-                <?php if ($candidate['role'] == 'ketua') : ?>
-                  <option selected value="ketua">Ketua</option>
-                <?php else : ?>
-                  <option selected value="wakil ketua">Wakil Ketua</option>
-                <?php endif; ?>
+                <option value="#" disabled <?= !isset($candidate['role']) ? 'selected' : ''; ?>>Select Role</option>
+                <option value="ketua" <?= isset($candidate['role']) && $candidate['role'] == 'ketua' ? 'selected' : ''; ?>>Ketua</option>
+                <option value="wakil ketua" <?= isset($candidate['role']) && $candidate['role'] == 'wakil ketua' ? 'selected' : ''; ?>>Wakil Ketua</option>
               </select>
+
               <div class="invalid-feedback">
                 <p><?= session('validationErrors')['role'] ?? ''; ?></p>
               </div>

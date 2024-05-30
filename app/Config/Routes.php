@@ -7,10 +7,22 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/login', 'Home::login');
 $routes->post('/login', 'Home::authenticate');
+$routes->get('/register', 'Home::register');
+$routes->post('/register', 'Home::registerAction');
+$routes->get('/verify', 'Home::verify');
+$routes->post('/verify-token', 'Home::verifyToken');
 
 $routes->post('/logout', 'Home::logout');
 
 $routes->get('/', 'WebController::index');
+$routes->get('/vote', 'WebController::vote');
+$routes->post('/vote', 'WebController::voteAction');
+$routes->get('/hasil', 'WebController::hasil');
+
+$routes->group('', ['filter' => 'auth'], function ($routes) {
+  $routes->post('/token', 'Home::getToken');
+});
+
 
 $routes->group('dashboard', ['filter' => ['auth', 'admin']], function ($routes) {
   $routes->get('/', 'DashboardController::index');

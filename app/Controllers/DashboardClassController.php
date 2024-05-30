@@ -29,7 +29,6 @@ class DashboardClassController extends BaseController
             'id' => Uuid::uuid4()->toString(),
             'name' => $this->request->getVar('name'),
             'generation' => $this->request->getVar('generation'),
-            'total' => $this->request->getVar('total')
         ];
 
         if (!$this->validateRequest()) {
@@ -48,7 +47,6 @@ class DashboardClassController extends BaseController
         $data = [
             'name' => $this->request->getVar('name'),
             'generation' => $this->request->getVar('generation'),
-            'total' => $this->request->getVar('total'),
         ];
 
         if (!$this->validateRequest()) {
@@ -72,7 +70,6 @@ class DashboardClassController extends BaseController
         $rules = [
             'name' => 'required|min_length[3]',
             'generation' => 'required|is_natural_no_zero|exact_length[4]',
-            'total' => 'required|is_natural_no_zero'
         ];
 
         return $this->validate($rules);

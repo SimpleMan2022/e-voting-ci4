@@ -14,7 +14,7 @@
 
 
     <div class="col-12">
-      <a href="<?= base_url(); ?>dashboard/candidates/experience" class="btn btn-primary mb-3"><i class="fas fa-arrow-left"></i> Back to candidates</a>
+      <a href="<?= base_url(); ?>dashboard/candidates/experiences" class="btn btn-primary mb-3"><i class="fas fa-arrow-left"></i> Back to candidates</a>
 
       <div class="card p-3">
         <form action="<?= base_url(); ?>dashboard/candidates/experiences/update/<?= $experience['id']; ?>" method="post">

@@ -16,13 +16,23 @@
     <div class="card rounded my-5 mx-4 mx-md-0" style="max-width: 800px; width: 90%; height: auto;">
       <div class="row g-0">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <img src="<?= base_url('assets/img/vote.gif'); ?>" class="img-fluid" alt="">
+          <img src="<?= base_url('assets/img/vote.gif'); ?>" class="img-fluid h-100 object-fit-cover" alt="">
         </div>
         <div class="col-md-6 p-4">
           <div class="mb-4">
-            <h3 class="fw-bold">Hello, Welcome Back!</h3>
-            <small class="text-muted fw-semibold">Sign in to your account</small>
+            <h3 class="fw-bold">Halo, Selamat datang kembali!</h3>
+            <small class="text-muted fw-semibold">Silahkan masuk ke akun anda</small>
           </div>
+          <?php if (session()->has('error')) : ?>
+            <div class="alert alert-danger" role="alert">
+              <?= session('error'); ?>
+            </div>
+          <?php endif; ?>
+          <?php if (session()->has('success')) : ?>
+            <div class="alert alert-success" role="alert">
+              <?= session('success'); ?>
+            </div>
+          <?php endif; ?>
           <form action="/login" method="POST">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
@@ -38,7 +48,7 @@
               <a class="text-decoration-none mx-3" href="#"><i class="ri-google-fill text-dark" style="font-size: 30px;"></i></a>
               <a class="text-decoration-none" href="#"><i class="ri-github-fill text-dark" style="font-size: 30px;"></i></a>
             </div>
-            <p class="fw-semibold">Dont have any account? <a href="/register">Sign Up</a></p>
+            <p class="fw-semibold">Belum punya akun? <a href="/register">Daftar</a></p>
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-sm rounded text-white" style="background-color: #3085C3;">
 

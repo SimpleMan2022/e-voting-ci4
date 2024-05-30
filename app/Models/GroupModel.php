@@ -45,4 +45,14 @@ class GroupModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+    public function getAllCandidateByGroup()
+    {
+        $builder = $this->db->table('groups');
+        $builder->select('groups.id AS group_id, groups.group_number, groups.group_image,groups.vision, groups.mission, GROUP_CONCAT(CASE WHEN c.role = \'ketua\' THEN c.name ELSE NULL END) AS ketua, GROUP_CONCAT(CASE WHEN c.role = \'wakil ketua\' THEN c.name ELSE NULL END) AS wakil');
+        $builder->join('candidates c', 'groups.id = c.group_number_id');
+        $builder->groupBy('groups.id, groups.group_number, groups.group_image');
+        $builder->orderBy('groups.group_number');
+
+        return $builder->get()->getResultArray();
+    }
 }
